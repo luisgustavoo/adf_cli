@@ -1,5 +1,6 @@
 import 'package:adf_cli/src/commands/students/subcommands/find_all_command.dart';
 import 'package:adf_cli/src/commands/students/subcommands/find_by_id_command.dart';
+import 'package:adf_cli/src/commands/students/subcommands/insert_command.dart';
 import 'package:adf_cli/src/repositories/students_repository.dart';
 import 'package:args/command_runner.dart';
 
@@ -8,6 +9,7 @@ class StudentsCommands extends Command<dynamic> {
     final studentsRepository = StudentsRepository();
     addSubcommand(FindAllCommand(studentsRepository));
     addSubcommand(FindByIdCommand(studentsRepository));
+    addSubcommand(InsertCommand(studentsRepository));
   }
 
   @override

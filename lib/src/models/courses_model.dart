@@ -20,7 +20,7 @@ class CoursesModel {
 
   final int id;
   final String name;
-  final bool isStudent;
+  bool isStudent;
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

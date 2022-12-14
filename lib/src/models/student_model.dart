@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:adf_cli/src/models/address_model.dart';
 import 'package:adf_cli/src/models/courses_model.dart';
 
-class StudentsModel {
-  StudentsModel({
+class StudentModel {
+  StudentModel({
     required this.name,
     required this.nameCourses,
     required this.courses,
@@ -13,7 +13,7 @@ class StudentsModel {
     this.age,
   });
 
-  factory StudentsModel.fromMap(Map<String, dynamic> map) {
+  factory StudentModel.fromMap(Map<String, dynamic> map) {
     var nameCoursesList = <String>[];
     var coursesList = <Map<String, dynamic>>[];
 
@@ -27,7 +27,7 @@ class StudentsModel {
       coursesList = List<Map<String, dynamic>>.from(coursesDynamic);
     }
 
-    return StudentsModel(
+    return StudentModel(
       id: map['id'] != null ? map['id'] as int : null,
       name: map['name'] as String? ?? '',
       age: map['age'] as int?,
@@ -39,8 +39,8 @@ class StudentsModel {
     );
   }
 
-  factory StudentsModel.fromJson(String source) =>
-      StudentsModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory StudentModel.fromJson(String source) =>
+      StudentModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   final int? id;
   final String name;

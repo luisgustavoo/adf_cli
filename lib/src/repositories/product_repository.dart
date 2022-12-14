@@ -12,13 +12,14 @@ class ProductRepository {
       throw Exception();
     }
 
-    final responseData =
-        jsonDecode(response.body) as List<Map<String, dynamic>>;
+    final responseData = jsonDecode(response.body) as List<dynamic>?;
 
-    if (responseData.isEmpty) {
+    if (responseData == null) {
       throw Exception('Produto não encontrado');
     }
 
-    return CoursesModel.fromMap(responseData.first);
+    return CoursesModel.fromMap(
+      List<Map<String, dynamic>>.from(responseData).first,
+    );
   }
 }

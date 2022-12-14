@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:adf_cli/src/models/students_model.dart';
+import 'package:adf_cli/src/models/student_model.dart';
 import 'package:http/http.dart' as http;
 
 class StudentsRepository {
-  Future<List<StudentsModel>> findAll() async {
+  Future<List<StudentModel>> findAll() async {
     final studentsResult = await http.get(
       Uri.parse('http://localhost:8080/students'),
     );
@@ -13,13 +13,13 @@ class StudentsRepository {
 
     if (studentsData != null) {
       final listStudents = List<Map<String, dynamic>>.from(studentsData);
-      return listStudents.map(StudentsModel.fromMap).toList();
+      return listStudents.map(StudentModel.fromMap).toList();
     }
 
-    return <StudentsModel>[];
+    return <StudentModel>[];
   }
 
-  Future<StudentsModel> findById(int id) async {
+  Future<StudentModel> findById(int id) async {
     final studentsResult = await http.get(
       Uri.parse('http://localhost:8080/students/$id'),
     );
@@ -28,13 +28,13 @@ class StudentsRepository {
         jsonDecode(studentsResult.body) as Map<String, dynamic>?;
 
     if (studentsData != null) {
-      return StudentsModel.fromMap(studentsData);
+      return StudentModel.fromMap(studentsData);
     }
 
     throw Exception('Estudante não encontrado');
   }
 
-  Future<void> insert(StudentsModel studentsModel) async {
+  Future<void> insert(StudentModel studentsModel) async {
     final response = await http.post(
       Uri.parse('http://localhost:8080/students'),
       body: studentsModel.toJson(),
@@ -46,7 +46,7 @@ class StudentsRepository {
     }
   }
 
-  Future<void> update(StudentsModel studentsModel) async {
+  Future<void> update(StudentModel studentsModel) async {
     final response = await http.put(
       Uri.parse('http://localhost:8080/students/${studentsModel.id}'),
       body: studentsModel.toJson(),
